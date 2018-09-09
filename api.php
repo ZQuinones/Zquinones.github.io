@@ -1,19 +1,10 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Recaptcha Demo</title>
-<script src='https://www.google.com/recaptcha/api.js'></script>
-</head>
-<body> 
-
 <?php
 // Checks if form has been submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     function post_captcha($user_response) {
         $fields_string = '';
         $fields = array(
-            'secret' => '_______________PRIVATE_KEY_______________',
+            'secret' => '6Lf1V28UAAAAAB4uapFYIv4Dwe0bfcHL4NTBuMdB',
             'response' => $user_response
         );
         foreach($fields as $key=>$value)
@@ -46,23 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 } else { ?>
     
-    <!-- FORM GOES HERE -->
-    <form action="recaptcha-v2.php" method="post">
-        <label for="fname">First Name*</label><br>
-        <input type="text" name="fname" id="fname" required autofocus><br><br>
-
-        <label for="lname">Last Name*</label><br>
-        <input type="text" name="lname" id="lname" required><br><br>
-
-        <label for="email">Email Address*</label><br>
-        <input type="email" name="email" id="email" required><br><br>
-
-        <div class="g-recaptcha" data-sitekey="_______________PUBLIC_KEY_______________"></div>
-        <br>
-        <input type="submit" id="submit" value="Submit">
-    </form>
+<!-- FORM GOES HERE -->
+<form>	
+	$senderEmail = "sender@gmail.com";
+	$recipent = "recipient@gmail.com";
+	$subject = $_POST["subject"];
+	$headers = "From: Feedback <$senderEmail>";
+	
+	$body = $_POST["messageFeed"];
+	
+	mail($recipient,$subject,$body,$headers);
+	
+	echo "Your message has been sent!<br><br>";
+</form>
 
 <?php } ?>
-
-</body>
-</html>
